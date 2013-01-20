@@ -1,2 +1,1 @@
-SimpleValidator
-===============
+Sandra.SimpleValidator
