@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Sandra.SimpleValidation.Tests.Rules
 {
-    public class RequiredTests
+    public class MinimumLengthTests
     {
         [Fact]
         public void Given_Valid_Model_Should_Return_IsValid_As_True()
@@ -12,8 +12,8 @@ namespace Sandra.SimpleValidation.Tests.Rules
             var validator = new TestClassValidator();
             var model = new TestClass
             {
-                Name = "Hello World",
-                Thing = "Thing!"
+                Name = "0123456789",
+                Thing = "0123456789"
             };
 
             var result = validator.Validate(model);
@@ -27,8 +27,8 @@ namespace Sandra.SimpleValidation.Tests.Rules
             var validator = new TestClassValidator();
             var model = new TestClass
             {
-                Name = string.Empty,
-                Thing = "Thing!"
+                Name = "0123456789",
+                Thing = "01234"
             };
 
             var result = validator.Validate(model);
@@ -42,13 +42,13 @@ namespace Sandra.SimpleValidation.Tests.Rules
             var validator = new TestClassValidator();
             var model = new TestClass
             {
-                Name = "Hello World",
+                Name = "0123456789",
                 Thing = string.Empty // Configured with custom message
             };
 
             var result = validator.Validate(model);
 
-            Assert.Equal("Thing is required!", result.Messages[0].Message);
+            Assert.Equal("Should be length of 10!", result.Messages[0].Message);
         }
 
         [Fact]
@@ -58,12 +58,12 @@ namespace Sandra.SimpleValidation.Tests.Rules
             var model = new TestClass
             {
                 Name = string.Empty, // Configured with Default message
-                Thing = "Thing!"
+                Thing = "0123456789"
             };
 
             var result = validator.Validate(model);
 
-            Assert.Equal("Field is required", result.Messages[0].Message);
+            Assert.Equal("Field needs to be minimum length of 10", result.Messages[0].Message);
         }
 
         public class TestClass
@@ -77,10 +77,10 @@ namespace Sandra.SimpleValidation.Tests.Rules
             public TestClassValidator()
             {
                 For(x => x.Name)
-                    .Ensure(new Required());
+                    .Ensure(new MinimumLength(10));
 
                 For(x => x.Thing)
-                    .Ensure(new Required().WithMessage("Thing is required!"));
+                    .Ensure(new MinimumLength(10).WithMessage("Should be length of 10!"));
             }
         }
     }
