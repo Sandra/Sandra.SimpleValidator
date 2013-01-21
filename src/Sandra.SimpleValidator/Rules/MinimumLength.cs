@@ -4,15 +4,10 @@
     {
         private readonly int _length;
 
-        public MinimumLength()
-        {
-            Message = "Field needs to be minimum length of ";
-        }
-
         public MinimumLength(int length)
         {
             _length = length;
-            Message += length;
+            Message = "Field needs to be minimum length of " + length;
         }
 
         public bool IsValid(object value)
