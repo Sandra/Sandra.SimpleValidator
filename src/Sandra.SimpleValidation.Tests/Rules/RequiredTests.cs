@@ -72,7 +72,7 @@ namespace Sandra.SimpleValidation.Tests.Rules
             public string Thing { get; set; }
         }
 
-        public class TestClassValidator : ValidateBase<TestClass>
+        public class TestClassValidator : ValidateThis<TestClass>
         {
             public TestClassValidator()
             {
