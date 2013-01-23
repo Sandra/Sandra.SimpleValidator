@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Sandra.SimpleValidator
 {
-    public abstract class ValidateBase<T> : IModelValidator
+    public abstract class ValidateThis<T> : IModelValidator
     {
         private readonly ICollection<PropertyRule> _rules = new Collection<PropertyRule>();
 
@@ -44,7 +44,7 @@ namespace Sandra.SimpleValidator
 
             public PropertyRule(Expression<Func<T, dynamic>> property)
             {
-                _propertyName = ((MemberExpression) property.Body).Member.Name;
+                _propertyName = property.GetCorrectPropertyName();
                 Delegate = property.Compile();
             }
 
