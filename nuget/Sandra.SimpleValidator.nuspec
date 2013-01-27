@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Sandra.SimpleValidator</id>
-        <version>0.1.0</version>
+        <version>0.4.0</version>
         <title>Sandra.SimpleValidator</title>
         <authors>Phillip Haydon</authors>
         <owners>Phillip Haydon</owners>
@@ -10,6 +10,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Simple validation library for validating simple things on a model.</description>
         <copyright>2013</copyright>
+        <language>es-US</language>
         <tags>validation</tags>
     </metadata>
     <files>
