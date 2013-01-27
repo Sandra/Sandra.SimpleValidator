@@ -47,6 +47,7 @@
     <Compile Include="Rules\MaximumLengthTests.cs" />
     <Compile Include="Rules\MinimumLengthTests.cs" />
     <Compile Include="Rules\RequiredTests.cs" />
+    <Compile Include="SandraValidationExceptionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

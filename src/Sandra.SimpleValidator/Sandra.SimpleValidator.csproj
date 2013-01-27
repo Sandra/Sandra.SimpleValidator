@@ -37,6 +37,7 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Rules\BetweenLength.cs" />
     <Compile Include="Rules\MaximumLength.cs" />
+    <Compile Include="SandraValidationException.cs" />
     <Compile Include="ValidateThis.cs" />
     <Compile Include="Rules\Email.cs" />
     <Compile Include="IModelValidator.cs" />
