@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Sandra.SimpleValidator
 {
@@ -12,13 +9,12 @@ namespace Sandra.SimpleValidator
         {
             if (expression.Body is MemberExpression)
             {
-                return ((MemberExpression)expression.Body).Member.Name;
+                return ((MemberExpression) expression.Body).Member.Name;
             }
-            else
-            {
-                var op = ((UnaryExpression)expression.Body).Operand;
-                return ((MemberExpression)op).Member.Name;
-            }
+
+            var op = ((UnaryExpression) expression.Body).Operand;
+
+            return ((MemberExpression) op).Member.Name;
         }
     }
 }

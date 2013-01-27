@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Rules\AreSame.cs" />
     <Compile Include="Rules\BetweenLength.cs" />
     <Compile Include="Rules\MaximumLength.cs" />
     <Compile Include="SandraValidationException.cs" />

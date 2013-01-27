@@ -2,8 +2,8 @@
 {
     public class Between : IRule
     {
-        private dynamic _min;
         private dynamic _max;
+        private dynamic _min;
 
         public Between(int min, int max)
         {
@@ -54,8 +54,8 @@
         {
             if (isInclusive)
             {
-                _min-=1;
-                _max+=1;
+                _min -= 1;
+                _max += 1;
             }
 
             return this;
