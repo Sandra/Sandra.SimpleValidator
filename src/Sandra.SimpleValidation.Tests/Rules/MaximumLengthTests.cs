@@ -66,6 +66,21 @@ namespace Sandra.SimpleValidation.Tests.Rules
             Assert.Equal("Field needs to be Maximum length of 10", result.Messages[0].Message);
         }
 
+        [Fact]
+        public void Given_InValid_Model_Should_Not_Throw_Exception_When_Null_Values_Are_Present()
+        {
+            var validator = new TestClassValidator();
+            var model = new TestClass
+            {
+                Name = null,
+                Thing = null
+            };
+
+            var result = validator.Validate(model);
+
+            Assert.Equal("Field needs to be Maximum length of 10", result.Messages[0].Message);
+        }
+
         public class TestClass
         {
             public string Name { get; set; }

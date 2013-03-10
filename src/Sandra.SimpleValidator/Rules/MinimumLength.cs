@@ -12,6 +12,9 @@
 
         public bool IsValid(object value)
         {
+            if (value == null)
+                return false;
+
             return ((string) value).Length >= _length;
         }
 
