@@ -13,7 +13,7 @@
         public bool IsValid(object value)
         {
             if (value == null)
-                return;
+                return false;
 
             return ((string) value).Length <= _length;
         }
