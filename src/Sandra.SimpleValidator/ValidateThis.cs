@@ -9,7 +9,7 @@ namespace Sandra.SimpleValidator
     {
         private readonly ICollection<RuleBuilder> _rules = new Collection<RuleBuilder>();
 
-        public ValidationResult Validate(object modelToValidate)
+        public ValidationResult Validate(object modelToValidate, bool validateAllRules = false)
         {
             var result = new ValidationResult();
 
@@ -23,11 +23,11 @@ namespace Sandra.SimpleValidator
                 {
                     var compareRule = (ComparePropertyRule) propertyRule;
                     var valueToCompare = compareRule.Delegate2.Invoke((T) modelToValidate);
-                    propertyResult = compareRule.RunRulesWith(value, valueToCompare);
+                    propertyResult = compareRule.RunRulesWith(value, valueToCompare, validateAllRules);
                 }
                 else
                 {
-                    propertyResult = ((PropertyRule) propertyRule).RunRulesWith(value);
+                    propertyResult = ((PropertyRule)propertyRule).RunRulesWith(value, validateAllRules);
                 }
 
                 if (!propertyResult.Item1)
@@ -83,7 +83,7 @@ namespace Sandra.SimpleValidator
                 return this;
             }
 
-            public Tuple<bool, IEnumerable<ValidationError>> RunRulesWith(dynamic value, dynamic valueToCompare)
+            public Tuple<bool, IEnumerable<ValidationError>> RunRulesWith(dynamic value, dynamic valueToCompare, bool validateAllRules)
             {
                 var isValid = true;
                 var errors = new List<ValidationError>();
@@ -98,6 +98,11 @@ namespace Sandra.SimpleValidator
                             PropertyName = PropertyName,
                             Message = rule.Message
                         });
+
+                        if (!validateAllRules)
+                        {
+                            break;
+                        }
                     }
                 }
 
@@ -120,7 +125,7 @@ namespace Sandra.SimpleValidator
                 return this;
             }
 
-            public Tuple<bool, IEnumerable<ValidationError>> RunRulesWith(dynamic value)
+            public Tuple<bool, IEnumerable<ValidationError>> RunRulesWith(dynamic value, bool validateAllRules)
             {
                 var isValid = true;
                 var errors = new List<ValidationError>();
@@ -135,6 +140,11 @@ namespace Sandra.SimpleValidator
                             PropertyName = PropertyName,
                             Message = rule.Message
                         });
+                    }
+
+                    if (!validateAllRules)
+                    {
+                        break;
                     }
                 }
 

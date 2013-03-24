@@ -6,6 +6,8 @@ namespace Sandra.SimpleValidator
 {
     public class ValidationService
     {
+        private readonly bool _validateAllRules;
+
         static ValidationService()
         {
             ModelValidators = new Dictionary<Type, IModelValidator>();
@@ -27,13 +29,23 @@ namespace Sandra.SimpleValidator
             }
         }
 
+        public ValidationService()
+        {
+            _validateAllRules = false;
+        }
+
+        public ValidationService(bool validateAllRules)
+        {
+            _validateAllRules = validateAllRules;
+        }
+
         private static IDictionary<Type, IModelValidator> ModelValidators { get; set; }
 
         public virtual ValidationResult This<T>(T model)
         {
             var validator = ModelValidators[typeof (T)];
 
-            return validator.Validate(model);
+            return validator.Validate(model, _validateAllRules);
         }
     }
 }
