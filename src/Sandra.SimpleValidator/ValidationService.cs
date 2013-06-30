@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.Composition.Hosting;
 
 namespace Sandra.SimpleValidator
 {
@@ -12,20 +12,34 @@ namespace Sandra.SimpleValidator
         {
             ModelValidators = new Dictionary<Type, IModelValidator>();
 
-            var types = AppDomain.CurrentDomain.GetAssemblies().ToList()
-                                 .SelectMany(s => s.GetTypes())
-                                 .Where(x => x.BaseType != null &&
-                                             x.BaseType.GetInterfaces().Any(y => y == typeof (IModelValidator)) &&
-                                             !x.IsAbstract && x.IsClass);
+            var catalog = new AggregateCatalog(
+                new DirectoryCatalog(@".", @"*")
+                );
 
-            foreach (var modelValidator in types)
+            try
             {
-                if (modelValidator.BaseType == null)
+                catalog.Catalogs.Add(new DirectoryCatalog(@".\bin", @"*"));
+            }
+            catch (Exception)
+            {
+            }
+
+            var container = new CompositionContainer(catalog);
+            var exportedValidators = container.GetExports<IModelValidator>();
+            
+            ModelValidators = new Dictionary<Type, IModelValidator>();
+
+            foreach (var modelValidator in exportedValidators)
+            {
+                var modelValidatorInstance = modelValidator.Value;
+                var modelValidatorType = modelValidatorInstance.GetType();
+
+                if (modelValidatorType.BaseType == null)
                     continue;
 
-                var baseType = modelValidator.BaseType.GetGenericArguments()[0];
+                var baseType = modelValidatorType.BaseType.GetGenericArguments()[0];
 
-                ModelValidators.Add(baseType, Activator.CreateInstance(modelValidator) as IModelValidator);
+                ModelValidators.Add(baseType, modelValidator.Value);
             }
         }
 
@@ -43,7 +57,8 @@ namespace Sandra.SimpleValidator
 
         public virtual ValidationResult This<T>(T model)
         {
-            var validator = ModelValidators[typeof (T)];
+            var modelType = typeof (T);
+            var validator = ModelValidators[modelType];
 
             return validator.Validate(model, _validateAllRules);
         }

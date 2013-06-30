@@ -1,5 +1,8 @@
-﻿namespace Sandra.SimpleValidator
+﻿using System.ComponentModel.Composition;
+
+namespace Sandra.SimpleValidator
 {
+    [InheritedExport(typeof(IModelValidator))]
     public interface IModelValidator
     {
         /// <summary>
