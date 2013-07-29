@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
 
 namespace Sandra.SimpleValidator
 {
@@ -12,34 +11,23 @@ namespace Sandra.SimpleValidator
         {
             ModelValidators = new Dictionary<Type, IModelValidator>();
 
-            var catalog = new AggregateCatalog(
-                new DirectoryCatalog(@".", @"*")
-                );
-
-            try
+            var discoveredModelValidators = MefHelpers.GetExportedTypes<IModelValidator>();
+            if (discoveredModelValidators == null)
             {
-                catalog.Catalogs.Add(new DirectoryCatalog(@".\bin", @"*"));
-            }
-            catch (Exception)
-            {
+                return;
             }
 
-            var container = new CompositionContainer(catalog);
-            var exportedValidators = container.GetExports<IModelValidator>();
-            
-            ModelValidators = new Dictionary<Type, IModelValidator>();
-
-            foreach (var modelValidator in exportedValidators)
+            foreach (var modelValidator in discoveredModelValidators)
             {
-                var modelValidatorInstance = modelValidator.Value;
-                var modelValidatorType = modelValidatorInstance.GetType();
+                // Create an instance of this rule.
+                var modelRuleInstance = Activator.CreateInstance(modelValidator) as IModelValidator;
 
-                if (modelValidatorType.BaseType == null)
+                if (modelValidator.BaseType == null)
                     continue;
 
-                var baseType = modelValidatorType.BaseType.GetGenericArguments()[0];
+                var baseType = modelValidator.BaseType.GetGenericArguments()[0];
 
-                ModelValidators.Add(baseType, modelValidator.Value);
+                ModelValidators.Add(baseType, modelRuleInstance);
             }
         }
 
