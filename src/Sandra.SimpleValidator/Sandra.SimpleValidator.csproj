@@ -10,7 +10,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageTags>template</PackageTags>
+    <PackageTags>validation;validator</PackageTags>
+    <Description>Sandra.SimpleValidator is designed to be... a simple validator, nothing more. It has no ability to inject repositories and query the database to validate stuff. It has no ability to generate JavaScript validation.</Description>
   </PropertyGroup>
   
   <ItemGroup>
