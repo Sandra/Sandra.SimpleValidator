@@ -1,10 +1,9 @@
-﻿using Sandra.SimpleValidator;
-using Sandra.SimpleValidator.Rules;
+﻿using Sandra.SimpleValidator.Rules;
 using Xunit;
 
-namespace Sandra.SimpleValidation.Tests.Rules
+namespace Sandra.SimpleValidator.Tests.Rules
 {
-    public class MinimumLengthTests
+    public class MaximumLengthTests
     {
         [Fact]
         public void Given_Valid_Model_Should_Return_IsValid_As_True()
@@ -22,12 +21,27 @@ namespace Sandra.SimpleValidation.Tests.Rules
         }
 
         [Fact]
+        public void Given_Valid_Model_With_Null_String_Should_Return_IsValid_As_True()
+        {
+            var validator = new TestClassValidator();
+            var model = new TestClass
+            {
+                Name = null,
+                Thing = null
+            };
+
+            var result = validator.Validate(model);
+
+            Assert.True(result.IsValid);
+        }
+
+        [Fact]
         public void Given_InValid_Model_Should_Return_IsValid_As_False()
         {
             var validator = new TestClassValidator();
             var model = new TestClass
             {
-                Name = "0123456789",
+                Name = "0123456789!!!!!",
                 Thing = "01234"
             };
 
@@ -43,7 +57,7 @@ namespace Sandra.SimpleValidation.Tests.Rules
             var model = new TestClass
             {
                 Name = "0123456789",
-                Thing = string.Empty // Configured with custom message
+                Thing = "0123456789!!!!!!!!" // Configured with custom message
             };
 
             var result = validator.Validate(model);
@@ -57,28 +71,13 @@ namespace Sandra.SimpleValidation.Tests.Rules
             var validator = new TestClassValidator();
             var model = new TestClass
             {
-                Name = string.Empty, // Configured with Default message
+                Name = "0123456789!!!!!!!!!!!", // Configured with Default message
                 Thing = "0123456789"
             };
 
             var result = validator.Validate(model);
 
-            Assert.Equal("Field needs to be minimum length of 10", result.Messages[0].Message);
-        }
-
-        [Fact]
-        public void Given_InValid_Model_Should_Not_Throw_Exception_When_Null_Values_Are_Present()
-        {
-            var validator = new TestClassValidator();
-            var model = new TestClass
-            {
-                Name = null,
-                Thing = null
-            };
-
-            var result = validator.Validate(model);
-
-            Assert.Equal("Field needs to be minimum length of 10", result.Messages[0].Message);
+            Assert.Equal("Field needs to be Maximum length of 10", result.Messages[0].Message);
         }
 
         public class TestClass
@@ -92,10 +91,10 @@ namespace Sandra.SimpleValidation.Tests.Rules
             public TestClassValidator()
             {
                 For(x => x.Name)
-                    .Ensure(new MinimumLength(10));
+                    .Ensure(new MaximumLength(10));
 
                 For(x => x.Thing)
-                    .Ensure(new MinimumLength(10).WithMessage("Should be length of 10!"));
+                    .Ensure(new MaximumLength(10).WithMessage("Should be length of 10!"));
             }
         }
     }

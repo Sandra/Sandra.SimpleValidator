@@ -1,16 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandra.SimpleValidator", "src\Sandra.SimpleValidator\Sandra.SimpleValidator.csproj", "{68DCD5E0-3FCA-4897-9004-22BE8727192B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandra.SimpleValidation.Tests", "src\Sandra.SimpleValidation.Tests\Sandra.SimpleValidation.Tests.csproj", "{0C6F1DDB-FB22-4516-94D6-D0142B717A17}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4ED6C612-420E-4952-9B19-05BE8C9658EF}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandra.SimpleValidator.Tests", "tests\Sandra.SimpleValidator.Tests\Sandra.SimpleValidator.Tests.csproj", "{0C6F1DDB-FB22-4516-94D6-D0142B717A17}"
+ProjectSection(SolutionItems) = preProject
+	LICENSE = LICENSE
+	README.md = README.md
+	.gitignore = .gitignore
+	.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

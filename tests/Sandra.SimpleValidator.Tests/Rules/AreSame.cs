@@ -1,8 +1,7 @@
-﻿using Sandra.SimpleValidator;
-using Sandra.SimpleValidator.Rules;
+﻿using Sandra.SimpleValidator.Rules;
 using Xunit;
 
-namespace Sandra.SimpleValidation.Tests.Rules
+namespace Sandra.SimpleValidator.Tests.Rules
 {
     public class AreSameTests
     {

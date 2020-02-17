@@ -1,14 +1,15 @@
-﻿using Sandra.SimpleValidator;
-using Sandra.SimpleValidator.Rules;
+﻿using Sandra.SimpleValidator.Rules;
 using Xunit;
 
-namespace Sandra.SimpleValidation.Tests
+namespace Sandra.SimpleValidator.Tests
 {
     public class SandraValidationExceptionTests
     {
         [Fact]
         public void Given_Service_Throwing_SandraValidationException_Should_Contain_Results()
         {
+            ValidationService.RegisterAllFrom<UserValidator>();
+
             var validationService = new ValidationService();
             var dummyService = new DummyService(validationService);
 
@@ -20,6 +21,8 @@ namespace Sandra.SimpleValidation.Tests
         [Fact]
         public void Given_Service_Throwing_SandraValidationException_Should_Contain_One_Message()
         {
+            ValidationService.RegisterAllFrom<UserValidator>();
+            
             var validationService = new ValidationService();
             var dummyService = new DummyService(validationService);
 

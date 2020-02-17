@@ -19,9 +19,8 @@ namespace Sandra.SimpleValidator
 
                 Tuple<bool, IEnumerable<ValidationError>> propertyResult;
 
-                if (propertyRule is ComparePropertyRule)
+                if (propertyRule is ComparePropertyRule compareRule)
                 {
-                    var compareRule = (ComparePropertyRule) propertyRule;
                     var valueToCompare = compareRule.Delegate2.Invoke((T) modelToValidate);
                     propertyResult = compareRule.RunRulesWith(value, valueToCompare, validateAllRules);
                 }

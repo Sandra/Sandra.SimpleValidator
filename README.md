@@ -24,6 +24,13 @@ public class UserValidator : ValidateThis<User>
 }
 ```
 
+Tell the validation service about any validators.
+
+```csharp
+// this will look at the assembly associated to the generic argument and find all validators
+ValidationService.RegisterAllFrom<UserValidator>();
+```
+
 Then you can inject the `ValidationService` into your `Controller` or `NancyModule`
 
 ```csharp
