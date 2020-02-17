@@ -7,6 +7,9 @@
     <e p="C:\Users\phill\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\phill\.Rider2019.3\system\resharper-host\temp\ReSharperHost\v193\SolutionCaches\_Sandra.SimpleValidator.-1573933283.00" t="ExcludeRecursive" />
     <e p="D:\GitHub\Sandra.SimpleValidator" t="IncludeFlat">
+      <e p=".github\workflows\dotnetcore.yml" t="Include" />
+      <e p=".gitignore" t="Include" />
+      <e p="LICENSE" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="README.md" t="Include" />
       <e p="Sandra.SimpleValidator.sln" t="IncludeFlat" />
@@ -63,6 +66,7 @@
         <e p="Sandra.SimpleValidator.Tests.csproj" t="IncludeRecursive" />
         <e p="SandraValidationExceptionTests.cs" t="Include" />
       </e>
+      <e p="Things" t="Include" />
     </e>
   </component>
 </project>

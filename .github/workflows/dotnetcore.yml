@@ -33,4 +33,4 @@ jobs:
       run: dotnet test --configuration Release --no-build
 
     - name: Push Nugets
-      run: dotnet nuget push Sandra.SimpleValidator/bin/Release/*.nupkg -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push src/Sandra.SimpleValidator/bin/Release/*.nupkg -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json

@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandra.SimpleValidator", "src\Sandra.SimpleValidator\Sandra.SimpleValidator.csproj", "{68DCD5E0-3FCA-4897-9004-22BE8727192B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandra.SimpleValidator.Tests", "tests\Sandra.SimpleValidator.Tests\Sandra.SimpleValidator.Tests.csproj", "{0C6F1DDB-FB22-4516-94D6-D0142B717A17}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Things", "Things", "{06AB0BF1-522E-48D3-80AB-EC9E0E5E97CA}"
 ProjectSection(SolutionItems) = preProject
 	LICENSE = LICENSE
 	README.md = README.md
