@@ -14,17 +14,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+
+    - name: Build version prefix/suffix
+      run: echo "VERSION=1.0.${{ github.run_number }}" >> $GITHUB_ENV
 
     # Version of .NET is based off the value in global.json
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
 
     - name: Build with dotnet
-      run: dotnet build --configuration Release -p:Version=${{ env.VERSION }}
+      run: dotnet build --configuration Release -p:Version=${{ env.VERSION }} -p:ContinuousIntegrationBuild=true
 
     - name: Run unit tests
       run: dotnet test --configuration Release --no-build
 
-    - name: Push Nugets
-      run: dotnet nuget push src/Sandra.SimpleValidator/bin/Release/*.nupkg -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Sandra.SimpleValidator.${{ env.VERSION }}.nupkg.zip
+        path: ./artifacts/*
+
+    - name: Publish to NuGet.org
+      run: |
+        dotnet nuget push "./artifacts/*.nupkg" \
+          --api-key ${{ secrets.NUGET_TOKEN }} \
+          --source https://api.nuget.org/v3/index.json
