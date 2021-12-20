@@ -1,0 +1,26 @@
+name: Build + Deploy
+on: 
+  pull_request:
+    branches: [master]
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  VERSION: "1.0.${{ github.event.number }}"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    # Version of .NET is based off the value in global.json
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release -p:Version=${{ env.VERSION }}
+
+    - name: Run unit tests
+      run: dotnet test --configuration Release --no-build

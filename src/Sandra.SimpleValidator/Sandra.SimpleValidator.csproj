@@ -1,33 +1,38 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <PackageId>Sandra.SimpleValidator</PackageId>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Phillip Haydon</Authors>
     <PackageProjectUrl>https://github.com/Sandra/Sandra.SimpleValidator</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>validation;validator</PackageTags>
     <Description>Sandra.SimpleValidator is designed to be... a simple validator, nothing more. It has no ability to inject repositories and query the database to validate stuff. It has no ability to generate JavaScript validation.</Description>
+    <RepositoryUrl>https://github.com/Sandra/Sandra.SimpleValidator</RepositoryUrl>
+    <RepositoryType>c#</RepositoryType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net45" Version="1.0.0" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
-
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
   
 </Project>
